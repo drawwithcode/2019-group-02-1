@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    html {
+      background-color: #000000;
+    }
+
+    body {
+      padding: auto;
+      margin: auto;
+    }
+
+    #MainMenu {
+      margin: auto;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      position: absolute;
+      width: 100%;
+      height: auto;
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 5vh;
+      margin-bottom: 5vh;
+      font-family: 'Press Start 2P', cursive;
+      text-align: center;
+      font-size: 8vw;
+      background: linear-gradient(45deg, #ffc107, deeppink, #9c27b0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: hueRotate 3s infinite alternate;
+    }
+
+    @keyframes hueRotate {
+      0 {
+        filter: hue-rotate(0);
+      }
+
+      100% {
+        filter: hue-rotate(360deg);
+      }
+    }
+
+    #intro {
+      font-family: 'Press Start 2P', cursive;
+      margin: auto;
+      margin-bottom: 5vh;
+      width: 75%;
+      text-align: center;
+      font-size: 1vh;
+      color: #ffffff;
+      line-height: 175%
+    }
+
+    #pressStart {
+      font-family: 'Press Start 2P', cursive;
+      margin-top: auto;
+      text-align: center;
+      font-size: 1.5vh;
+      background: linear-gradient(225deg, #ffc107, deeppink, #9c27b0);
+      -webkit-background-clip: text;
+      /* -webkit-text-fill-color: transparent; */
+      animation: hueRotate 3s infinite alternate;
+    }
+
+    #pressStart:hover {
+      animation-name: btnStart;
+      animation-duration: 0.5s;
+      animation-iteration-count: infinite;
+      cursor: pointer;
+    }
+
+    @keyframes btnStart {
+      0 {
+        font-size: 1.5vh;
+      }
+
+      100% {
+        font-size: 2vh;
+      }
+    }
+
+    .white {
+      color: #ffffff;
+    }
+  </style>
+
+  <link rel="shortcut icon" href="./assets/favicon.ico" />
+  <link rel="bookmark" href="./assets/favicon.ico" type="image/x-icon" 　 />
+
+  <script src="p5.min.js"></script>
+  <script src="p5.sound.min.js"></script>
+  <!-- <script src="p5.collide2d.js"></script> -->
+  <!-- <script src="sketch.js"></script> -->
+</head>
+
+<body>
+  <script>
+  </script>
+  <div id='MainMenu'>
+    <h1>GAMENAME*</h1>
+    <p id='intro' class='white'>Welcome to “Game name*”!</br> The goal of the game is to reach the highest score and to finish all the levels. Using the trackpad or your mouse, you can move along the perimeter. Stop the ball from touching the
+      perimeter!! </br>You are playing with other gamers from all over the world, collaborate with them! Each time a new user logs in your brick will get smaller. The more the ball bounces the highest the score. When you reach a touchpoint, you’ll
+      change level and if
+      you fall you’ll start again from the last touchpoint.</p>
+
+    <!-- <p class='white' id="btnFullscreen" onclick="toggleFullscreen(document.documentElement);">Fullscreen Mode</p> -->
+    <a id='pressStart' href="theGame.html">
+      <h2 class='white'><span style="font-size:3vh">👉</span>PRESS START<span style="font-size:3vh">👈</span></h2>
+    </a>
+  </div>
+</body>
+
+</html>

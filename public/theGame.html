@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    html {
+      background-color: #000000;
+    }
+
+    body {
+      padding: auto;
+      margin: auto;
+    }
+
+    canvas {
+      margin: auto;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      position: absolute;
+    }
+
+    .white {
+      line-height: 150%;
+      font-family: 'Press Start 2P', cursive;
+      color: #ffffff;
+      font-size: 1vh;
+    }
+
+    h2 {
+      font-family: 'Press Start 2P', cursive;
+      color: #e94e1a;
+      font-size: 2vh;
+    }
+    #h2Settings,#h2Rules{
+      cursor: pointer;
+    }
+
+    #RulesAndSetting {
+
+      width: 16vw;
+      text-align: left;
+      left: 2.5%;
+      top: 5%;
+      transform: translate(0%, 0%);
+      position: absolute;
+    }
+
+    #ScoreAndTouchPt {
+      width: 16vw;
+      text-align: right;
+      left: 97.5%;
+      top: 5%;
+      transform: translate(-100%, 0%);
+      position: absolute;
+    }
+
+    #touchPt {
+      width: 16vw;
+      text-align: right;
+      left: 95%;
+      top: 95%;
+      /* transform: translate(-100%, -100%); */
+      /* position: absolute; */
+    }
+
+    #fullscreen {
+      background-color: #252525;
+      color: #ffffff;
+    }
+
+    #hand {
+      font-size: 3vw;
+    }
+
+    #lvl6 {
+      font-size: 3vw;
+      color: #49267b;
+    }
+
+    #lvl5 {
+      font-size: 3vw;
+      color: #873089;
+    }
+
+    #lvl4 {
+      font-size: 3vw;
+      color: #1ba3dd;
+    }
+
+    #lvl3 {
+      font-size: 3vw;
+      color: #f07e18;
+    }
+
+    #lvl2 {
+      font-size: 3vw;
+      color: #d07db2;
+    }
+
+    #lvl1 {
+      font-size: 3vw;
+      color: #abcf80;
+    }
+
+    .touchPoint {
+      animation-name: letterspa;
+      animation-duration: 0.15s;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+    }
+
+    @keyframes letterspa {
+      0 {
+        letter-spacing: 0px;
+      }
+
+      100% {
+        letter-spacing: 2px;
+      }
+    }
+  </style>
+  <link rel="shortcut icon" href="./assets/favicon.ico" />
+  <link rel="bookmark" href="./assets/favicon.ico" type="image/x-icon"/>
+  <script src="p5.min.js"></script>
+  <script src="p5.sound.min.js"></script>
+  <script src="p5.collide2d.js"></script>
+  <script src="sketch.js"></script>
+</head>
+
+<body>
+  <script>
+    function foldRules() {
+      var x = document.getElementById("gameRules");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    }
+
+    function foldSettings() {
+      var x = document.getElementById("settings");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    }
+  </script>
+  <div id='RulesAndSetting'>
+    <h2 id="h2Rules" onclick="foldRules()">GAME RULES</h2>
+    <p id='gameRules' class='white'>Welcome to “Game name*”! The goal of the game is to reach the highest score and to finish all the levels. Using the trackpad or your mouse, you can move along the perimeter. Stop the ball from touching the
+      perimeter!! You are
+      playing with other gamers from all over the world, collaborate with them! Each time a new user logs in your brick will get smaller. The more the ball bounces the highest the score. When you reach a touchpoint, you’ll change level and if you
+      fall you’ll start again from the last touchpoint.</p></br>
+    <h2 id="h2Settings" onclick="foldSettings()">SETTINGS</h2>
+    <div id="settings">
+      <p id='btnFullscreen' class='white'>× Fullscreen</p>
+      <p id='btnMute' class='white'>√ Music</p>
+      <p id='btnSoundEffects' class='white'>√ Sound Effects</p>
+      <!-- <p id='btnMB' class='white'>× Motion Blur</p> -->
+    </div>
+  </div>
+
+  <div id='ScoreAndTouchPt'>
+    <div id='touchPt'>
+      <h2>TOUCH POINT</h2>
+      <!-- <img src='./assets/TouchPt.png'></img> -->
+      <div class='touchPoint' style="line-height:5%; margin-bottom: 8vh;">
+        <p id='lvl6'>▇</p>
+        <p id='lvl5'>▇</p>
+        <p id='lvl4'>▇</p>
+        <p id='lvl3'>▇</p>
+        <p id='lvl2'>▇</p>
+        <p id='lvl1'>▇</p>
+        <!-- <p id='hand'>👉</p> -->
+      </div>
+    </div>
+    <h2>SCORE</h2>
+    <p class='white' style='font-size:3vh' id='currentScore'>0</p>
+    <h2>HIGHSCORE</h2>
+    <p class='white' style='font-size:3vh' id='Highscore'>0</p>
+  </div>
+</body>
+
+</html>
