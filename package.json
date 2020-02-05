@@ -1,16 +1,26 @@
 {
-  "name": "p5-simple-node",
+  "name": "2019-group-02-1",
   "version": "1.0.0",
-  "description": "A simple web app",
+  "description": "SimpleWebApp",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "author": "DDDDDylan Wu",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drawwithcode/2019-group-02-1.git"
+  },
+  "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/drawwithcode/2019-group-02-1/issues"
+  },
+  "homepage": "https://github.com/drawwithcode/2019-group-02-1#readme",
   "dependencies": {
+    "bufferutil": "^4.0.1",
     "express": "^4.17.1",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.3.0",
+    "utf-8-validate": "^5.0.2"
   }
 }
