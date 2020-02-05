@@ -146,7 +146,7 @@ function resetStatus() {
 
 
 function collideBall(_bkX, _bkY, _blX, _blY) {
-  if (Math.pow(_bkX-_blX,2)+Math.pow(_bkY-_blY,2)<=12100 && cd === 0) {
+  if (Math.pow(_bkX - _blX, 2) + Math.pow(_bkY - _blY, 2) <= 12100 && cd === 0) {
     if (_blY <= 41 && _blY >= 0 || _blY >= 959 && _blY <= 1000) {
       if (abs(_blX - _bkX) <= 16 + brickWidth / 2) {
         collideStatus = true;
