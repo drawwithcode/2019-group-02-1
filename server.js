@@ -1,7 +1,5 @@
 console.log("server is running");
 
-// require('./p5.js');
-// require('./p5.collide2d.js');
 var express = require("express");
 
 var app = express();
@@ -18,7 +16,6 @@ var socket = require('socket.io');
 
 var io = socket(server);
 
-
 var playerNum = 0;
 var brickXPosition = -500,
   brickYPosition = -500;
@@ -32,50 +29,35 @@ var collideBrickX = -500,
   collideBrickY = -500;
 var fallStatus = false;
 var touchpoint = [0, 5, 10, 15, 20, 25, 30];
-var ballxSpd = Random(-1, 1);
-var ballySpd = Random(-1, 1);
-var ballxPos = 500;
-var ballyPos = 500;
-
-
+var ballxSpd = Random(-1, 1),
+  ballySpd = Random(-1, 1);
+var ballxPos = 500,
+  ballyPos = 500;
 var cd = 0;
 
 io.on("connection", newConnection);
 io.on("connection", function (socket) {
   playerNum = io.eio.clientsCount;
-})
+});
 
 setInterval(function () {
   ballxPos += ballxSpd * 5;
   ballyPos += ballySpd * 5;
   collideBall(brickXPosition, brickYPosition, ballxPos, ballyPos);
-  scoreIncrease();
-  lastLevelS();
-  updateHighscore();
-  ballFall();
-  if (cd > 0) {
-    cd = cd - 1;
-  } else {
-    cd = 0;
-  }
+  scorechange();
 }, 10);
 
 
 
 function newConnection(socket) {
-  // console.log(socket.id);
-  // console.log(playerNum);
   socket.on("mouse", mouseMessage);
 
-  function mouseMessage(recieveData) {
+  function mouseMessage(recievedData) {
 
-    var numOfPlayer = "numOfPlayer";
-    recieveData[numOfPlayer] = playerNum;
+    recievedData["numOfPlayer"] = playerNum;
 
-    // console.log("ID: " + socket.id + " x = " + recieveData.brickXPos + ", y = " + recieveData.brickYPos);
-
-    brickXPosition = recieveData.brickXPos;
-    brickYPosition = recieveData.brickYPos;
+    brickXPosition = recievedData.brickXPos;
+    brickYPosition = recievedData.brickYPos;
     if (brickXPosition == 0 || brickXPosition == 1000) {
       brickHeight = 200 * (0.8 / playerNum + 0.2);
       brickWidth = 50;
@@ -84,38 +66,50 @@ function newConnection(socket) {
       brickWidth = 200 * (0.8 / playerNum + 0.2);
     }
 
-    recieveData["ballxPos"] = ballxPos;
-    recieveData["ballyPos"] = ballyPos;
-    recieveData["score"] = score;
-    recieveData["highscore"] = highscore;
-    recieveData["collideStatus"] = collideStatus;
-    recieveData["collideBrickX"] = collideBrickX;
-    recieveData["collideBrickY"] = collideBrickY;
-    recieveData["fallStatus"] = fallStatus;
+    // recievedData["ballxPos"] = ballxPos;
+    // recievedData["ballyPos"] = ballyPos;
+    // recievedData["score"] = score;
+    // recievedData["highscore"] = highscore;
+    // recievedData["collideStatus"] = collideStatus;
+    // recievedData["collideBrickX"] = collideBrickX;
+    // recievedData["collideBrickY"] = collideBrickY;
+    // recievedData["fallStatus"] = fallStatus;
 
 
-    // console.log(recieveData);
-    socket.broadcast.emit("mouseBroadcast", recieveData);
+    var gSEmitData = {};
+    gSEmitData["numOfPlayer"] = playerNum;
+    gSEmitData["ballxPos"] = ballxPos;
+    gSEmitData["ballyPos"] = ballyPos;
+    gSEmitData["score"] = score;
+    gSEmitData["highscore"] = highscore;
+    gSEmitData["collideStatus"] = collideStatus;
+    gSEmitData["collideBrickX"] = collideBrickX;
+    gSEmitData["collideBrickY"] = collideBrickY;
+    gSEmitData["fallStatus"] = fallStatus;
+
+
+    // console.log(recievedData);
+    socket.broadcast.emit("mouseBroadcast", recievedData);
+    socket.emit("gamestatusemit", gSEmitData);
+
     resetStatus();
   }
 }
 
-function scoreIncrease() {
-  // console.log("scoreIncrease" + "is running");
+function scorechange() {
+  cd = Constrain(cd - 1, 0, 10);
+
   if (collideStatus == true) {
     score++;
     if (brickXPosition == 0 || brickXPosition == 1000) {
-      ballxSpd *= -1;
+      ballxSpd = (500 - ballxPos) / (500 * Random(0.75, 2));
       ballySpd = Random(Constrain(-brickYPosition / 500, -1, 0), Constrain(2 - brickYPosition / 500, 0, 1));
     } else {
-      ballySpd *= -1;
+      ballySpd = (500 - ballyPos) / (500 * Random(0.75, 2));
       ballxSpd = Random(Constrain(-brickXPosition / 500, -1, 0), Constrain(2 - brickXPosition / 500, 0, 1));
     }
   }
-}
 
-function lastLevelS() {
-  // console.log("lastLevelS" + "is running");
   for (i = 0; i < 7; i++) {
     if (score < touchpoint[i]) {
       if (i > 1) {
@@ -129,12 +123,17 @@ function lastLevelS() {
       break;
     }
   }
-}
 
-function updateHighscore() {
-  // console.log("updateHighscore" + "is running");
   if (score > highscore) {
     highscore = score;
+  }
+
+  if (abs(ballxPos - 500) > 600 || abs(ballyPos - 500) > 600) {
+    ballxPos = Random(350, 650);
+    ballyPos = Random(350, 650);
+    score = lastLevelScore;
+    fallStatus = true;
+    console.log("Fall!");
   }
 }
 
@@ -147,10 +146,9 @@ function resetStatus() {
 
 
 function collideBall(_bkX, _bkY, _blX, _blY) {
-  // console.log("collideBall" + "is running");
   if (cd === 0) {
-    if (_blY <= 41 && _blY >= 20 || _blY >= 959 && _blY <= 980) {
-      if (abs(_blX - _bkX) <= brickWidth / 2) {
+    if (_blY <= 41 && _blY >= 0 || _blY >= 959 && _blY <= 1000) {
+      if (abs(_blX - _bkX) <= 16 + brickWidth / 2) {
         collideStatus = true;
         collideBrickX = _bkX;
         collideBrickY = _bkY;
@@ -159,8 +157,8 @@ function collideBall(_bkX, _bkY, _blX, _blY) {
       }
     }
 
-    if (_blX <= 41 && _blX >= 20 || _blX >= 959 && _blX <=980) {
-      if (abs(_blY - _bkY) <= brickHeight / 2) {
+    if (_blX <= 41 && _blX >= 0 || _blX >= 959 && _blX <= 1000) {
+      if (abs(_blY - _bkY) <= 16 + brickHeight / 2) {
         collideStatus = true;
         collideBrickX = _bkX;
         collideBrickY = _bkY;
@@ -170,24 +168,6 @@ function collideBall(_bkX, _bkY, _blX, _blY) {
     }
   }
 }
-
-function ballFall() {
-  if (abs(ballxPos - 500) > 600 || abs(ballyPos - 500) > 600) {
-    ballxPos = Random(350, 650);
-    ballyPos = Random(350, 650);
-    score = lastLevelScore;
-    fallStatus = true;
-    console.log("Fall!");
-  }
-}
-
-// function cdReduce() {
-//   if (cd > 0) {
-//     cd = cd - 1;
-//   } else {
-//     cd = 0;
-//   }
-// }
 
 function Constrain(x, min, max) {
   if (x < min) {

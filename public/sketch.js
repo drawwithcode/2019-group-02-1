@@ -81,6 +81,7 @@ function setup() {
   //接收数据
   socket = io();
   socket.on("mouseBroadcast", newDrawing);
+  socket.on("gamestatusemit", downloadGameSt);
 
   function newDrawing(recievedData) {
     //获取玩家数量
@@ -95,7 +96,9 @@ function setup() {
     } else {
       image(bkhArr[currentLevel - 1], recievedData.brickXPos, recievedData.brickYPos, 200 * brickWidthPercentage, 50);
     }
+  }
 
+  function downloadGameSt(recievedData) {
     ballOSX = recievedData.ballxPos;
     ballOSY = recievedData.ballyPos;
     score = recievedData.score;
@@ -104,15 +107,21 @@ function setup() {
     fallSt = recievedData.fallStatus;
     collideBX = recievedData.collideBrickX;
     collideBY = recievedData.collideBrickY;
-
-
-
   }
 }
 
 
 
 function draw() {
+
+  var sendData = {
+    brickXPos: brick.bX,
+    brickYPos: brick.bY
+  }
+
+  socket.emit('mouse', sendData);
+
+
   //计算当前等级
   currentLevel = lvl.match(/\d+(.\d+)?/g) * 1;
   // console.log(currentLevel);
@@ -175,12 +184,7 @@ function draw() {
   brick.brickRect(brick.bX, brick.bY, brick.bW, brick.bH);
 
 
-  var sendData = {
-    brickXPos: brick.bX,
-    brickYPos: brick.bY
-  }
 
-  socket.emit('mouse', sendData);
 
 }
 
