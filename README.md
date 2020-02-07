@@ -53,7 +53,7 @@ The music as well is designed to recreate the atmosphere of and eighties gamer r
 The player can both decide to MUTE/UNMUTE the theme music and the bouncing sound effect, of course we suggest you to listen to it.
 
 ```
-function MuteMusic() { //静音
+function MuteMusic() { //
   if (music.isLooping()) {
     music.pause();
     select('#btnMute').style('color', '#e94e1a');
@@ -65,7 +65,7 @@ function MuteMusic() { //静音
   }
 }
 
-function ToggleSoundEffects() { //关闭音效
+function ToggleSoundEffects() { //
   if (soundEffects == true) {
     soundEffects = false;
     select('#btnSoundEffects').style('color', '#e94e1a');
@@ -132,8 +132,16 @@ function bricks() {
 
 The game is built to allow and invite the collaboration between each user. Starting from a traditional single player game, we redesigned it to connect different players is something that is well known to everybody. Each time a new player logs in the width of the bricks decreases in proportion of the total gamers number. 
 In case of a huge amount of player, the brick won't get smaller than the 20% of the width of the original single brick. 
+
+Sketch.js part
 ```
   brickWidthPercentage = 0.8 / numOfPlayer + 0.2;
+```
+Server.js part
+```
+ io.on("connection", function (socket) {
+  playerNum = io.eio.clientsCount;
+});
 ```
 ## **Object collision**
 
@@ -260,7 +268,23 @@ function touchPt() {
 }
 
 
+```
 
+## **Beating effect**
+
+Some of the elements of the page have a beating effect that reseamble the bounce of the ball on the brick. The backgrounds of the different levels as well the touchpoint score bar keep moving increasing the general trippy/optical effect.
+
+Touchpoint beating effect
+```
+//making touchpoint beat
+css
+ .touchPoint {
+      animation-name: letterspa;
+      animation-duration: 0.15s;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+    } 
+    
     @keyframes letterspa {
       0 {
         letter-spacing: 0px;
@@ -271,22 +295,15 @@ function touchPt() {
       }
 }
 ```
-
-## **Beating effect**
-
-Some of the elements of the page have a beating effect that reseamble the bounce of the ball on the brick. The backgrounds of the different levels as well the touchpoint score bar keep moving increasing the general trippy/optical effect.
+Background beating
 ```
-//making touchpoint beat
-css
- .touchPoint {
-      animation-name: letterspa;
-      animation-duration: 0.15s;
-      animation-iteration-count: infinite;
-      animation-direction: alternate;
-    }  
+push();
+  translate(width / 2, height / 2);
+  scale((sin(millis() * PI / 150) + 1) * 0.003 + 1);
+  translate(-width / 2, -height / 2);
+  image(bgArr[currentLevel - 1], 500, 500, 1000, 1000);
+  pop();
 ```
-    
-
 ## **Team**
 
 ![8](readmeimages/8.gif)
