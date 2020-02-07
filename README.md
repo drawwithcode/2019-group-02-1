@@ -1,2 +1,3 @@
-# NodeP5Project
- SimpleWebApp
+## **Concept**
+
+**BOBIT** is a gaming project created using p5.js as final project for the Creative Coding course at Politecnico di Milano. The first input was to create a webpage where people could interact with each other in order to reach a common goal. That's how bobit was created! We decided to build an old arcade game, with simple rules that everybody know but with a differece, instead of playing alone, everybody can join the game and collaborate with all the others players to reach the highest score. The aim of the game aren't just the points but also being able to work with the others during an activity that we usually do by ourself.
