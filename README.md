@@ -12,7 +12,7 @@
 09. [Object collision](#Object-collision)
 10. [Score & touchpoints](#Score-&-touchpoints)
 11. [Beating effect](#Beating-effect)
-
+12. [team](#Team)
 
 ## **Concept**
 
@@ -252,8 +252,13 @@ css
       animation-duration: 0.15s;
       animation-iteration-count: infinite;
       animation-direction: alternate;
-    }
-   
+    }  
 ```
     
-    
+
+## **Team**
+
+Chen Cheng-Hsin
+Wu Di
+Ana Flàvia Magalhaes
+Francesca Mauri
