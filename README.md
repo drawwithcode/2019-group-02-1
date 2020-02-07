@@ -172,6 +172,61 @@ function scorechange() {
 
 ```
 **Touchpoints**
+We defined some values `var touchpoin = [0,5,10,15,20,25,30]` to reach in order to pass to the following touchpoint and level. When the players overcome the touchpoint, the background, the brick and the ball change design. One reached a touchpoint if the ball fall, the game will start again from the lastest one, without starting from the begginig. Of course is the players keep letting the ball falling, they will have to start from lowest points.
+./sketch.js
+```
+var touchpoin = [0,5,10,15,20,25,30]
+ 
+function ResetTouchPt() {
+  //initial touchpoint
+  select('#lvl1').html('▇');
+  select('#lvl2').html('▇');
+  select('#lvl3').html('▇');
+  select('#lvl4').html('▇');
+  select('#lvl5').html('▇');
+  select('#lvl6').html('▇');
+}
+
+function touchPt() {
+  lvl = "#lvl1";
+  var i;
+  for (i = 0; i < 7; i++) {
+    if (score < touchpoint[i]) {
+      lvl = "#lvl" + i;
+      if (i > 1) {
+        prevscore = touchpoint[i - 2];
+      } else {
+        prevscore = 0;
+      }
+      break;
+    } else if (score >= touchpoint[6]) {
+      lvl = "#lvl6";
+      break;
+    }
+  }
+  ResetTouchPt();
+  select(lvl).html('👉▇');
+}
+
+//making touchpoint beat
+css
+ .touchPoint {
+      animation-name: letterspa;
+      animation-duration: 0.15s;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+    }
+
+    @keyframes letterspa {
+      0 {
+        letter-spacing: 0px;
+      }
+
+      100% {
+        letter-spacing: 2px;
+      }
+}
+```
 
 
 
