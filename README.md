@@ -25,9 +25,9 @@ Bobit is designed to be played on computer only. The player can easily interact 
 
 ## **Libraries**
 
+_p5.min.js
 _p5.dom.js
 _p5.sound.js
-_p5.collide2D
 
 ## **Start screen**
 
@@ -100,9 +100,9 @@ One of the main part of the costruction of the game code was to find a way to ma
 Starting from the library p5.collide2D we re-constructed it and recode it in the server.js part since p5 libraries doesn't work in the node server. The user playing records the data of the brick position sending it to the server that sends back the ball position and the score and highscore uptade, so if the ball fall also the touchpoint is influenced. The server also give back information about the numebr of player connected in that moment (so also the numer of bricks) that influence the brick width (every time a new player logs in the page, the others players bricks get shorter).
 In order to increase the visual interaction between the brick adn the ball, when they collide, also the brick bounces following the ball movement.
 ```
-on server.js
+// on server.js
+// collide
 
-collide
 function collideBall(_bkX, _bkY, _blX, _blY) {
   if (Math.pow(_bkX - _blX, 2) + Math.pow(_bkY - _blY, 2) <= 12100) {
     if (_blY <= 41 && _blY >= 0 || _blY >= 959 && _blY <= 1000) {
