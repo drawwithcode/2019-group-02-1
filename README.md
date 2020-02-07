@@ -99,7 +99,10 @@ function bricks() {
 ```
 ## **Bricks/users interaction
 
+![7](readmeimages/7.gif)
 
+The game is built to allow and invite the collaboration between each user. Starting from a traditional single player game, we redesigned it to connect different players is something that is well known to everybody. Each time a new player logs in the width of the bricks decreases in proportion of the total gamers number. 
+In case of a huge amount of player, the brick won't get smaller than the 20% of the width of the original single brick. 
 
 ## **Object collision**
 
