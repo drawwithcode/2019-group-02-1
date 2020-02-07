@@ -7,6 +7,7 @@
 06. [Page Layout](#Page-Layout)
 07. [Brick movement](#Brick-movement)
 08. [Object collision](#Object-collision)
+09. [Score & touchpoints](#Score-&-touchpoints)
 
 
 ## **Concept**
@@ -122,9 +123,56 @@ function collideBall(_bkX, _bkY, _blX, _blY) {
 
 ```
 
+## **Score & touchpoints**
 
+Just like in every other points game, we wanted to show not just the current score but also the highest ever reached. On the right part of the screen the user will always be able to see this datas.
+The current score represent the total number of bouncing of the ball on every brick, no matter how many player are logged in and it's send directly from the server.js.
 
+```
+./server.js
+//score & highscore
 
+function scorechange() {
+
+  if (collideStatus == true) {
+    score++;
+    if (brickXPosition == 0 || brickXPosition == 1000) {
+      ballxSpd = (500 - ballxPos) / (500 * Random(0.75, 2));
+      ballySpd = Random(Constrain(-brickYPosition / 500, -1, 0), Constrain(2 - brickYPosition / 500, 0, 1));
+    } else {
+      ballySpd = (500 - ballyPos) / (500 * Random(0.75, 2));
+      ballxSpd = Random(Constrain(-brickXPosition / 500, -1, 0), Constrain(2 - brickXPosition / 500, 0, 1));
+    }
+  }
+
+  for (i = 0; i < 7; i++) {
+    if (score < touchpoint[i]) {
+      if (i > 1) {
+        lastLevelScore = touchpoint[i - 2];
+      } else {
+        lastLevelScore = 0;
+      }
+      break;
+    } else if (score >= touchpoint[6]) {
+      lastLevelScore = touchpoint[4];
+      break;
+    }
+  }
+
+  if (score > highscore) {
+    highscore = score;
+  }
+
+  if (abs(ballxPos - 500) > 600 || abs(ballyPos - 500) > 600) {
+    ballxPos = Random(350, 650);
+    ballyPos = Random(350, 650);
+    score = lastLevelScore;
+    fallStatus = true;
+    console.log("Fall!");
+  }
+}
+
+```
 
 
 
