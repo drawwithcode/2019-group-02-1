@@ -39,8 +39,8 @@ _p5.sound.js
 
 **TOOLS**
 
-_node.js
-_socket.io
+[_node.js](https://nodejs.org/en/about/)
+[_socket.io](https://socket.io/)
 
 ## **Start screen**
 
