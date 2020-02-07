@@ -10,6 +10,7 @@
 07. [Brick movement](#Brick-movement)
 08. [Object collision](#Object-collision)
 09. [Score & touchpoints](#Score-&-touchpoints)
+10. [Beating effetc](#Beating-effect)
 
 
 ## **Concept**
@@ -179,6 +180,9 @@ function scorechange() {
 
 ```
 **Touchpoints**
+
+![6](readmeimages/6.gif)
+
 We defined some values `var touchpoin = [0,5,10,15,20,25,30]` to reach in order to pass to the following touchpoint and level. When the players overcome the touchpoint, the background, the brick and the ball change design. One reached a touchpoint if the ball fall, the game will start again from the lastest one, without starting from the begginig. Of course is the players keep letting the ball falling, they will have to start from lowest points.
 ```
 ./sketch.js
@@ -216,14 +220,7 @@ function touchPt() {
   select(lvl).html('👉▇');
 }
 
-//making touchpoint beat
-css
- .touchPoint {
-      animation-name: letterspa;
-      animation-duration: 0.15s;
-      animation-iteration-count: infinite;
-      animation-direction: alternate;
-    }
+
 
     @keyframes letterspa {
       0 {
@@ -236,5 +233,17 @@ css
 }
 ```
 
+## **Beating effect**
 
-
+Some of the elements of the page have a beating effect that reseamble the bounce of the ball on the brick. The backgrounds of the different levels as well the touchpoint score bar keep moving increasing the general trippy/optical effect.
+```
+//making touchpoint beat
+css
+ .touchPoint {
+      animation-name: letterspa;
+      animation-duration: 0.15s;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+    }
+    ```
+    
