@@ -93,8 +93,10 @@ function bricks() {
 ```
 ## **Object collision**
 
+![4](readmeimages/4.gif)
+
 One of the main part of the costruction of the game code was to find a way to make the ball bouncing back when it touches the brick. 
-Starting from the library p5.collide2D we re-constructed it and recode it in the server.js part since p5 libraries doesn't work in the node server. The user playing records the data of the brick position sending it to the server that sends back the ball position and the score and highscore uptade, so if the ball fall also the touchpoint is influenced. 
+Starting from the library p5.collide2D we re-constructed it and recode it in the server.js part since p5 libraries doesn't work in the node server. The user playing records the data of the brick position sending it to the server that sends back the ball position and the score and highscore uptade, so if the ball fall also the touchpoint is influenced. The server also give back information about the numebr of player connected in that moment (so also the numer of bricks) that influence the brick width (every time a new player logs in the page, the others players bricks get shorter).
 In order to increase the visual interaction between the brick adn the ball, when they collide, also the brick bounces following the ball movement.
 ```
 on server.js
