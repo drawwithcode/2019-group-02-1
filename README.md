@@ -11,7 +11,7 @@
 08. [Bricks/users interaction](#Bricks/users-interaction)
 09. [Object collision](#Object-collision)
 10. [Score & touchpoints](#Score-&-touchpoints)
-11. [Beating effetc](#Beating-effect)
+11. [Beating effect](#Beating-effect)
 
 
 ## **Concept**
