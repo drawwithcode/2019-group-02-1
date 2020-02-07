@@ -48,6 +48,35 @@ In the central part of the page there is the game square while on the right ther
 
 ![2](readmeimages/2.gif)
 
+**MUSIC**
+The music as well is designed to recreate the atmosphere of and eighties gamer room. The theme music is an 8 bit song, going on loop that reseamble the sountracks of the old video games and with its fast ritm helps the players to keep up.
+The player can both decide to MUTE/UNMUTE the theme music and the bouncing sound effect, of course we suggest you to listen to it.
+
+```
+function MuteMusic() { //静音
+  if (music.isLooping()) {
+    music.pause();
+    select('#btnMute').style('color', '#e94e1a');
+    select('#btnMute').html('× Music');
+  } else {
+    music.loop();
+    select('#btnMute').style('color', 'white');
+    select('#btnMute').html('√ Music');
+  }
+}
+
+function ToggleSoundEffects() { //关闭音效
+  if (soundEffects == true) {
+    soundEffects = false;
+    select('#btnSoundEffects').style('color', '#e94e1a');
+    select('#btnSoundEffects').html('× Sound Effects');
+  } else {
+    soundEffects = true;
+    select('#btnSoundEffects').style('color', 'white');
+    select('#btnSoundEffects').html('√ Sound Effects');
+  }
+}
+```
 ## **Brick movement**
 
 ![3](readmeimages/3.gif)
@@ -103,7 +132,9 @@ function bricks() {
 
 The game is built to allow and invite the collaboration between each user. Starting from a traditional single player game, we redesigned it to connect different players is something that is well known to everybody. Each time a new player logs in the width of the bricks decreases in proportion of the total gamers number. 
 In case of a huge amount of player, the brick won't get smaller than the 20% of the width of the original single brick. 
-
+```
+  brickWidthPercentage = 0.8 / numOfPlayer + 0.2;
+```
 ## **Object collision**
 
 ![4](readmeimages/4.gif)
