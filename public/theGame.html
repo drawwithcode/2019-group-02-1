@@ -161,11 +161,13 @@
     }
 
     function hengshuping() {
+      var x = document.getElementById("landscape");
       if (window.orientation == 180 || window.orientation == 0) {
-        alert("Please switch to landscape mode!")
+        alert("Please switch to landscape mode!");
+        x.style.display = "none";
       }
       if (window.orientation == 90 || window.orientation == -90) {
-        // alert("横屏状态！")
+        x.style.display = "block";
       }
     }
     window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", hengshuping, false);
@@ -202,6 +204,9 @@
     <p class='white' style='font-size:3vh' id='currentScore'>0</p>
     <h2>HIGHSCORE</h2>
     <p class='white' style='font-size:3vh' id='Highscore'>0</p>
+  </div>
+  <div id="landscape">
+    <image src="./assets/Rotate.png"></image>
   </div>
 </body>
 
