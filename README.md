@@ -4,7 +4,7 @@
 01. [Concept](#Concept)
 02. [Graphic](#Graphic)
 03. [Interaction](#Interaction)
-04. [Libraries](#Libraries)
+04. [Libraries & tools](#Libraries-&-tools)
 05. [Start screen](#Start-screen)
 06. [Page Layout](#Page-Layout)
 07. [Brick movement](#Brick-movement)
@@ -29,10 +29,16 @@ In order to add some difficulties the levels have trippy graphics that distract 
 
 Bobit is designed to be played on computer only. The player can easily interact with the brick  just using dragging on the touchbar or using the mouse. The idea was to keep it as simple as possible in order to let the player focus on the game only.
 
-## **Libraries**
+## **Libraries & tools**
+
+**LIBRARIES**
 
 _p5.min.js
 _p5.sound.js
+
+**TOOLS**
+_node.js
+_socket.io
 
 ## **Start screen**
 
