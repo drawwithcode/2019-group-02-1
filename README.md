@@ -296,7 +296,7 @@ css
       }
 }
 ```
-Background beating
+Background beating effect
 ```
 push();
   translate(width / 2, height / 2);
