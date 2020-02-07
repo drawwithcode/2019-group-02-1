@@ -219,6 +219,22 @@ function touchPt() {
   select(lvl).html('👉▇');
 }
 
+
+function detectmob() {
+  if (navigator.userAgent.match(/Android/i) ||
+    navigator.userAgent.match(/webOS/i) ||
+    navigator.userAgent.match(/iPhone/i) ||
+    navigator.userAgent.match(/iPad/i) ||
+    navigator.userAgent.match(/iPod/i) ||
+    navigator.userAgent.match(/BlackBerry/i) ||
+    navigator.userAgent.match(/Windows Phone/i)
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 function touchEnded(event) {
   DeviceOrientationEvent.requestPermission() //MOBILE PHONE GYRO
 }
@@ -233,11 +249,13 @@ function bricks() {
 
   //brick move
   this.brickMove = function () {
+    var dtcmob = detectmob();
+    console.log(dtcmob);
     var m = k * mouseX - mouseY;
     var n = height - k * mouseX - mouseY;
     var a = mouseX - width / 2;
     var b = mouseY - height / 2;
-    if (rotationX != null && rotationY != null) {
+    if (dtcmob == true) {
       var mx = constrain(map(rotationY, -20, 20, 1, width), 1, width),
         my = constrain(map(rotationX, -20, 20, 1, height), 1, height);
       m = k * mx - my;
