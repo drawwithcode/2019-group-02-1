@@ -39,7 +39,8 @@ Opening the game page, before starting to play you will see this opening page co
 
 The game page layout is designed is order t make everything visible and accesible. On the top-letf corner you can find the game rules and below the settings for the fullscreen mode, and for turning ON and OFF the music theme and the sound effects.
 In the central part of the page there is the game square while on the right there are all the references to the currents points, the highscore and the scorebar that shows the level.
-(screen pagina ) 
+
+![2](readmeimages/2.gif)
 
 ## **Brick movement**
 
@@ -122,6 +123,8 @@ function collideBall(_bkX, _bkY, _blX, _blY) {
 ```
 
 ## **Score & touchpoints**
+
+![5](readmeimages/5.gif)
 
 Just like in every other arcade game, we wanted to show not just the current score but also the highest ever reached. On the right part of the screen the user will always be able to see this datas.
 **Score**The current score represent the total number of bouncing of the ball on every brick, no matter how many player are logged in and it's send directly from the server.js. The server receiveng the datas about the current location of the bricks is able to detect the collision and if that condition in true `if (collideStatus == true) {  score++;` the score increases. When the score reaches and overcomes the highscore, its values uptades with the new goal. `if (score > highscore) {  highscore = score; } `
