@@ -258,7 +258,12 @@ css
 
 ## **Team**
 
+![8](readmeimages/8.gif)
+
 Chen Cheng-Hsin
+
 Wu Di
+
 Ana Flàvia Magalhaes
+
 Francesca Mauri
