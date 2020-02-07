@@ -6,6 +6,7 @@
 05. [Start screen](#Start-screen)
 06. [Page Layout](#Page-Layout)
 07. [Brick movement](#Brick-movement)
+08. [Object collision](#Object-collision)
 
 
 ## **Concept**
@@ -90,6 +91,7 @@ function bricks() {
   }
   
 ```
+## **Object collision**
 
 
 
