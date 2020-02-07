@@ -189,7 +189,7 @@ function draw() {
 
 
 function ResetTouchPt() {
-  //分数条重置
+  //initial touchpoint
   select('#lvl1').html('▇');
   select('#lvl2').html('▇');
   select('#lvl3').html('▇');
@@ -199,7 +199,6 @@ function ResetTouchPt() {
 }
 
 function touchPt() {
-  //分数条指针位置
   lvl = "#lvl1";
   var i;
   for (i = 0; i < 7; i++) {
@@ -221,7 +220,6 @@ function touchPt() {
 }
 
 function bricks() {
-  //板 参数
   this.bX = 0;
   this.bY = 0;
   this.bW = 200;
@@ -229,13 +227,14 @@ function bricks() {
   var k = height / width;
   var brickOrien;
 
-  //板 运动
+  //brick move
   this.brickMove = function () {
     var m = k * mouseX - mouseY;
     var n = height - k * mouseX - mouseY;
     var a = mouseX - width / 2;
     var b = mouseY - height / 2;
-    //mouseXY -> brick position
+
+    //mouseXY -> project brick position
     if (m * n > 0) {
       this.bW = 200;
       this.bH = 50;

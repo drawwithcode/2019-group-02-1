@@ -118,6 +118,8 @@ function scorechange() {
   if (abs(ballxPos - 500) > 600 || abs(ballyPos - 500) > 600) {
     ballxPos = Random(350, 650);
     ballyPos = Random(350, 650);
+    ballxSpd = Random(-1, 1);
+    ballySpd = Random(-1, 1);
     score = lastLevelScore;
     fallStatus = true;
     console.log("Fall!");

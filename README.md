@@ -7,6 +7,7 @@
 06. [Page Layout](#Page-Layout)
 07. [Brick movement](#Brick-movement)
 08. [Object collision](#Object-collision)
+09. [Score & touchpoints](#Score-&-touchpoints)
 
 
 ## **Concept**
@@ -24,9 +25,9 @@ Bobit is designed to be played on computer only. The player can easily interact 
 
 ## **Libraries**
 
+_p5.min.js
 _p5.dom.js
 _p5.sound.js
-_p5.collide2D
 
 ## **Start screen**
 
@@ -65,7 +66,6 @@ function bricks() {
     if (m * n > 0) {
       this.bW = 200;
       this.bH = 50;
-      brickOrien = 0;
       if (b > 0) {
         this.bY = height;
         this.bX = height / 2 * a / b + width / 2;
@@ -76,7 +76,6 @@ function bricks() {
     } else if (m * n < 0) {
       this.bW = 50;
       this.bH = 200;
-      brickOrien = 1;
       if (a > 0) {
         this.bY = width / 2 * b / a + height / 2;
         this.bX = width;
@@ -93,13 +92,15 @@ function bricks() {
 ```
 ## **Object collision**
 
+![4](readmeimages/4.gif)
+
 One of the main part of the costruction of the game code was to find a way to make the ball bouncing back when it touches the brick. 
-Starting from the library p5.collide2D we re-constructed it and recode it in the server.js part since p5 libraries doesn't work in the node server. The user playing records the data of the brick position sending it to the server that sends back the ball position and the score and highscore uptade, so if the ball fall also the touchpoint is influenced. 
+Starting from the library p5.collide2D we re-constructed it and recode it in the server.js part since p5 libraries doesn't work in the node server. The user playing records the data of the brick position sending it to the server that sends back the ball position and the score and highscore uptade, so if the ball fall also the touchpoint is influenced. The server also give back information about the numebr of player connected in that moment (so also the numer of bricks) that influence the brick width (every time a new player logs in the page, the others players bricks get shorter).
 In order to increase the visual interaction between the brick adn the ball, when they collide, also the brick bounces following the ball movement.
 ```
-on server.js
+// on server.js
+// collide
 
-collide
 function collideBall(_bkX, _bkY, _blX, _blY) {
   if (Math.pow(_bkX - _blX, 2) + Math.pow(_bkY - _blY, 2) <= 12100) {
     if (_blY <= 41 && _blY >= 0 || _blY >= 959 && _blY <= 1000) {
@@ -120,9 +121,112 @@ function collideBall(_bkX, _bkY, _blX, _blY) {
 
 ```
 
+## **Score & touchpoints**
 
+Just like in every other arcade game, we wanted to show not just the current score but also the highest ever reached. On the right part of the screen the user will always be able to see this datas.
+**Score**The current score represent the total number of bouncing of the ball on every brick, no matter how many player are logged in and it's send directly from the server.js. The server receiveng the datas about the current location of the bricks is able to detect the collision and if that condition in true `if (collideStatus == true) {  score++;` the score increases. When the score reaches and overcomes the highscore, its values uptades with the new goal. `if (score > highscore) {  highscore = score; } `
 
+```
+// server.js
+// score & highscore
 
+function scorechange() {
+
+  if (collideStatus == true) {
+    score++;
+    if (brickXPosition == 0 || brickXPosition == 1000) {
+      ballxSpd = (500 - ballxPos) / (500 * Random(0.75, 2));
+      ballySpd = Random(Constrain(-brickYPosition / 500, -1, 0), Constrain(2 - brickYPosition / 500, 0, 1));
+    } else {
+      ballySpd = (500 - ballyPos) / (500 * Random(0.75, 2));
+      ballxSpd = Random(Constrain(-brickXPosition / 500, -1, 0), Constrain(2 - brickXPosition / 500, 0, 1));
+    }
+  }
+
+  for (i = 0; i < 7; i++) {
+    if (score < touchpoint[i]) {
+      if (i > 1) {
+        lastLevelScore = touchpoint[i - 2];
+      } else {
+        lastLevelScore = 0;
+      }
+      break;
+    } else if (score >= touchpoint[6]) {
+      lastLevelScore = touchpoint[4];
+      break;
+    }
+  }
+
+  if (score > highscore) {
+    highscore = score;
+  }
+
+  if (abs(ballxPos - 500) > 600 || abs(ballyPos - 500) > 600) {
+    ballxPos = Random(350, 650);
+    ballyPos = Random(350, 650);
+    score = lastLevelScore;
+    fallStatus = true;
+    console.log("Fall!");
+  }
+}
+
+```
+**Touchpoints**
+We defined some values `var touchpoin = [0,5,10,15,20,25,30]` to reach in order to pass to the following touchpoint and level. When the players overcome the touchpoint, the background, the brick and the ball change design. One reached a touchpoint if the ball fall, the game will start again from the lastest one, without starting from the begginig. Of course is the players keep letting the ball falling, they will have to start from lowest points.
+./sketch.js
+```
+var touchpoin = [0,5,10,15,20,25,30]
+ 
+function ResetTouchPt() {
+  //initial touchpoint
+  select('#lvl1').html('▇');
+  select('#lvl2').html('▇');
+  select('#lvl3').html('▇');
+  select('#lvl4').html('▇');
+  select('#lvl5').html('▇');
+  select('#lvl6').html('▇');
+}
+
+function touchPt() {
+  lvl = "#lvl1";
+  var i;
+  for (i = 0; i < 7; i++) {
+    if (score < touchpoint[i]) {
+      lvl = "#lvl" + i;
+      if (i > 1) {
+        prevscore = touchpoint[i - 2];
+      } else {
+        prevscore = 0;
+      }
+      break;
+    } else if (score >= touchpoint[6]) {
+      lvl = "#lvl6";
+      break;
+    }
+  }
+  ResetTouchPt();
+  select(lvl).html('👉▇');
+}
+
+//making touchpoint beat
+css
+ .touchPoint {
+      animation-name: letterspa;
+      animation-duration: 0.15s;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+    }
+
+    @keyframes letterspa {
+      0 {
+        letter-spacing: 0px;
+      }
+
+      100% {
+        letter-spacing: 2px;
+      }
+}
+```
 
 
 
