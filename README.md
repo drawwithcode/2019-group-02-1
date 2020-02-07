@@ -32,7 +32,6 @@ Bobit is designed to be played on computer only. The player can easily interact 
 ## **Libraries**
 
 _p5.min.js
-_p5.dom.js
 _p5.sound.js
 
 ## **Start screen**
