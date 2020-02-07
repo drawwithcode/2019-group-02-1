@@ -1,3 +1,5 @@
+![00](readmeimages/00.gif)
+
 ## Table of Contents
 01. [Concept](#Concept)
 02. [Graphic](#Graphic)
@@ -18,6 +20,8 @@
 
 Bobit graphic reminds the old games like brick breaker, bounce and pacman. Everything from the background, the ball, the brick and even the site font ( Press Start 2P ) is designed to reseamble and to bring the player back to a games room in the eighties.
 In order to add some difficulties the levels have trippy graphics that distract the player from the ball and the brick which, most of the time, blend in the background. The levels , going two by two, have three different themes that all together create a storytelling, from a domestic habitat in the first and second levels, through the aliens and ufo sigthings and the reach of the Space, to the total abstraction of the final two levels.
+
+![0](readmeimages/0.gif)
 
 ## **Interaction**
 
