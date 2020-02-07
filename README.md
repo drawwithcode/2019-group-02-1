@@ -41,9 +41,56 @@ In the central part of the page there is the game square while on the right ther
 
 ## **Brick movement**
 
-The brick is controlled by the player using the touchbar/mouse. Our aims was to avoid the classic keyboard interaction in favor of a more fluent movement. The gamer can always see the arrow and how it interact and influence the brick motion. 
-
 ![3](readmeimages/3.gif)
+
+The brick is controlled by the player using the touchbar/mouse. Our aims was to avoid the classic keyboard interaction in favor of a more fluent movement. The gamer can always see the arrow and how it interact and influence the brick motion. To avoid following the perimeter the player can move the arrow in every part of the screen because its X and Y position are calculated and projected along the perimeter itself.
+
+```
+function bricks() {
+  this.bX = 0;
+  this.bY = 0;
+  this.bW = 200;
+  this.bH = 50;
+  var k = height / width;
+  
+  //brick move
+  this.brickMove = function () {
+    var m = k * mouseX - mouseY;
+    var n = height - k * mouseX - mouseY;
+    var a = mouseX - width / 2;
+    var b = mouseY - height / 2;
+
+    //mouseXY -> project brick position
+    if (m * n > 0) {
+      this.bW = 200;
+      this.bH = 50;
+      brickOrien = 0;
+      if (b > 0) {
+        this.bY = height;
+        this.bX = height / 2 * a / b + width / 2;
+      } else {
+        this.bY = 0;
+        this.bX = -height / 2 * a / b + width / 2;
+      }
+    } else if (m * n < 0) {
+      this.bW = 50;
+      this.bH = 200;
+      brickOrien = 1;
+      if (a > 0) {
+        this.bY = width / 2 * b / a + height / 2;
+        this.bX = width;
+      } else {
+        this.bY = -width / 2 * b / a + height / 2;
+        this.bX = 0;
+      }
+    } else {
+      this.bX = -500;
+      this.bY = -500;
+    }
+  }
+  
+```
+
 
 
 
