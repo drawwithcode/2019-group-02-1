@@ -66,7 +66,6 @@ function bricks() {
     if (m * n > 0) {
       this.bW = 200;
       this.bH = 50;
-      brickOrien = 0;
       if (b > 0) {
         this.bY = height;
         this.bX = height / 2 * a / b + width / 2;
@@ -77,7 +76,6 @@ function bricks() {
     } else if (m * n < 0) {
       this.bW = 50;
       this.bH = 200;
-      brickOrien = 1;
       if (a > 0) {
         this.bY = width / 2 * b / a + height / 2;
         this.bX = width;
@@ -129,8 +127,8 @@ Just like in every other arcade game, we wanted to show not just the current sco
 **Score**The current score represent the total number of bouncing of the ball on every brick, no matter how many player are logged in and it's send directly from the server.js. The server receiveng the datas about the current location of the bricks is able to detect the collision and if that condition in true `if (collideStatus == true) {  score++;` the score increases. When the score reaches and overcomes the highscore, its values uptades with the new goal. `if (score > highscore) {  highscore = score; } `
 
 ```
-./server.js
-//score & highscore
+// server.js
+// score & highscore
 
 function scorechange() {
 
