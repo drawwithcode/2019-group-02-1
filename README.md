@@ -8,9 +8,10 @@
 05. [Start screen](#Start-screen)
 06. [Page Layout](#Page-Layout)
 07. [Brick movement](#Brick-movement)
-08. [Object collision](#Object-collision)
-09. [Score & touchpoints](#Score-&-touchpoints)
-10. [Beating effetc](#Beating-effect)
+08. [Bricks/users interaction](#Bricks/users-interaction)
+09. [Object collision](#Object-collision)
+10. [Score & touchpoints](#Score-&-touchpoints)
+11. [Beating effetc](#Beating-effect)
 
 
 ## **Concept**
@@ -96,6 +97,10 @@ function bricks() {
   }
   
 ```
+## **Bricks/users interaction
+
+
+
 ## **Object collision**
 
 ![4](readmeimages/4.gif)
