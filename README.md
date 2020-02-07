@@ -179,6 +179,9 @@ function scorechange() {
 
 ```
 **Touchpoints**
+
+![6](readmeimages/6.gif)
+
 We defined some values `var touchpoin = [0,5,10,15,20,25,30]` to reach in order to pass to the following touchpoint and level. When the players overcome the touchpoint, the background, the brick and the ball change design. One reached a touchpoint if the ball fall, the game will start again from the lastest one, without starting from the begginig. Of course is the players keep letting the ball falling, they will have to start from lowest points.
 ```
 ./sketch.js
