@@ -219,7 +219,7 @@ function touchPt() {
   select(lvl).html('👉▇');
 }
 
-function touchEnded() {
+function touchEnded(event) {
   DeviceOrientationEvent.requestPermission() //MOBILE PHONE GYRO
 }
 
@@ -233,17 +233,17 @@ function bricks() {
 
   //brick move
   this.brickMove = function () {
-      var m = k * mouseX - mouseY;
-      var n = height - k * mouseX - mouseY;
-      var a = mouseX - width / 2;
-      var b = mouseY - height / 2;
+    var m = k * mouseX - mouseY;
+    var n = height - k * mouseX - mouseY;
+    var a = mouseX - width / 2;
+    var b = mouseY - height / 2;
     if (rotationX != null && rotationY != null) {
       var mx = constrain(map(rotationY, -20, 20, 1, width), 1, width),
         my = constrain(map(rotationX, -20, 20, 1, height), 1, height);
-         m = k * mx - my;
-         n = height - k * mx - my;
-         a = mx - width / 2;
-         b = my - height / 2;
+      m = k * mx - my;
+      n = height - k * mx - my;
+      a = mx - width / 2;
+      b = my - height / 2;
     }
 
     //mouseXY -> project brick position
