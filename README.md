@@ -93,8 +93,32 @@ function bricks() {
 ```
 ## **Object collision**
 
+One of the main part of the costruction of the game code was to find a way to make the ball bouncing back when it touches the brick. 
+Starting from the library p5.collide2D we re-constructed it and recode it in the server.js part since p5 libraries doesn't work in the node server.
+In order to increase the visual interaction between the brick adn the ball, when they collide, also the brick bounces following the ball movement.
+```
+on server.js
 
+collide
+function collideBall(_bkX, _bkY, _blX, _blY) {
+  if (Math.pow(_bkX - _blX, 2) + Math.pow(_bkY - _blY, 2) <= 12100) {
+    if (_blY <= 41 && _blY >= 0 || _blY >= 959 && _blY <= 1000) {
+      if (abs(_blX - _bkX) <= 16 + brickWidth / 2) {
+        collideStatus = true;
+        console.log("Collide!" + _bkX + " " + _bkY + " " + _blX + " " + _blY);
+      }
+    }
 
+    if (_blX <= 41 && _blX >= 0 || _blX >= 959 && _blX <= 1000) {
+      if (abs(_blY - _bkY) <= 16 + brickHeight / 2) {
+        collideStatus = true;
+        console.log("Collide!" + _bkX + " " + _bkY + " " + _blX + " " + _blY);
+      }
+    }
+  }
+}
+
+```
 
 
 
