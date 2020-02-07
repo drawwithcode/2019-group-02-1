@@ -3,8 +3,9 @@
 02. [Graphic](#Graphic)
 03. [Interaction](#Interaction)
 04. [Libraries](#Libraries)
-05. [Main features](#Main-features)
-
+05. [Start screen](#Start-screen)
+06. [Page Layout](#Page-Layout)
+07. [Brick movement](#Brick-movement)
 
 
 ## **Concept**
@@ -26,13 +27,29 @@ _p5.dom.js
 _p5.sound.js
 _p5.collide2D
 
-## **Main features**
-
-**START SCREEN**
+## **Start screen**
 
 Opening the game page, before starting to play you will see this opening page containing the game rules, after reading it you only have to click to star playing.
 
 ![1](readmeimages/1.gif)
+
+## **Page layout**
+
+The game page layout is designed is order t make everything visible and accesible. On the top-letf corner you can find the game rules and below the settings for the fullscreen mode, and for turning ON and OFF the music theme and the sound effects.
+In the central part of the page there is the game square while on the right there are all the references to the currents points, the highscore and the scorebar that shows the level.
+(screen pagina ) 
+
+## **Brick movement**
+
+The brick is controlled by the player using the touchbar/mouse. Our aims was to avoid the classic keyboard interaction in favor of a more fluent movement. The gamer can always see the arrow and how it interact and influence the brick motion. 
+
+![3](readmeimages/3.gif)
+
+
+
+
+
+
 
 
 
