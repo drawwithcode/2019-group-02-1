@@ -35,7 +35,9 @@
       color: #e94e1a;
       font-size: 2vh;
     }
-    #h2Settings,#h2Rules{
+
+    #h2Settings,
+    #h2Rules {
       cursor: pointer;
     }
 
@@ -72,37 +74,37 @@
       color: #ffffff;
     }
 
-    #hand {
+    #hand,
+    #lvl1,
+    #lvl2,
+    #lvl3,
+    #lvl4,
+    #lvl5,
+    #lvl6 {
       font-size: 3vw;
     }
 
     #lvl6 {
-      font-size: 3vw;
       color: #49267b;
     }
 
     #lvl5 {
-      font-size: 3vw;
       color: #873089;
     }
 
     #lvl4 {
-      font-size: 3vw;
       color: #1ba3dd;
     }
 
     #lvl3 {
-      font-size: 3vw;
       color: #f07e18;
     }
 
     #lvl2 {
-      font-size: 3vw;
       color: #d07db2;
     }
 
     #lvl1 {
-      font-size: 3vw;
       color: #abcf80;
     }
 
@@ -124,10 +126,10 @@
     }
   </style>
   <link rel="shortcut icon" href="./assets/favicon.ico" />
-  <link rel="bookmark" href="./assets/favicon.ico" type="image/x-icon"/>
+  <link rel="bookmark" href="./assets/favicon.ico" type="image/x-icon" />
   <script src="p5.min.js"></script>
   <script src="p5.sound.min.js"></script>
-  <script src="p5.collide2d.js"></script>
+  <!-- <script src="p5.collide2d.js"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
   <script src="sketch.js"></script>
 </head>
@@ -136,29 +138,35 @@
   <script>
     function foldRules() {
       var x = document.getElementById("gameRules");
+      var txt = document.getElementById("h2Rules");
       if (x.style.display === "none") {
         x.style.display = "block";
+        txt.innerHTML = "- GAME RULES";
       } else {
         x.style.display = "none";
+        txt.innerHTML = "+ GAME RULES";
       }
     }
 
     function foldSettings() {
       var x = document.getElementById("settings");
+      var txt = document.getElementById("h2Settings");
       if (x.style.display === "none") {
         x.style.display = "block";
+        txt.innerHTML = "- SETTINGS";
       } else {
         x.style.display = "none";
+        txt.innerHTML = "+ SETTINGS";
       }
     }
   </script>
   <div id='RulesAndSetting'>
-    <h2 id="h2Rules" onclick="foldRules()">GAME RULES</h2>
+    <h2 id="h2Rules" onclick="foldRules()">- GAME RULES</h2>
     <p id='gameRules' class='white'>Welcome to “Game name*”! The goal of the game is to reach the highest score and to finish all the levels. Using the trackpad or your mouse, you can move along the perimeter. Stop the ball from touching the
       perimeter!! You are
       playing with other gamers from all over the world, collaborate with them! Each time a new user logs in your brick will get smaller. The more the ball bounces the highest the score. When you reach a touchpoint, you’ll change level and if you
       fall you’ll start again from the last touchpoint.</p></br>
-    <h2 id="h2Settings" onclick="foldSettings()">SETTINGS</h2>
+    <h2 id="h2Settings" onclick="foldSettings()">- SETTINGS</h2>
     <div id="settings">
       <p id='btnFullscreen' class='white'>× Fullscreen</p>
       <p id='btnMute' class='white'>√ Music</p>
@@ -170,7 +178,6 @@
   <div id='ScoreAndTouchPt'>
     <div id='touchPt'>
       <h2>TOUCH POINT</h2>
-      <!-- <img src='./assets/TouchPt.png'></img> -->
       <div class='touchPoint' style="line-height:5%; margin-bottom: 8vh;">
         <p id='lvl6'>▇</p>
         <p id='lvl5'>▇</p>

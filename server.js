@@ -25,28 +25,29 @@ var score = 0,
   highscore = 0,
   lastLevelScore = 0;
 var collideStatus = false;
-var collideBrickX = -500,
-  collideBrickY = -500;
 var fallStatus = false;
 var touchpoint = [0, 5, 10, 15, 20, 25, 30];
 var ballxSpd = Random(-1, 1),
   ballySpd = Random(-1, 1);
 var ballxPos = 500,
   ballyPos = 500;
-var cd = 0;
 
 io.on("connection", newConnection);
 io.on("connection", function (socket) {
   playerNum = io.eio.clientsCount;
+  console.log("player number = " + playerNum);
 });
 
 setInterval(function () {
-  ballxPos += ballxSpd * 5;
-  ballyPos += ballySpd * 5;
-  collideBall(brickXPosition, brickYPosition, ballxPos, ballyPos);
-  scorechange();
+  if (playerNum > 0) {
+    ballxPos += ballxSpd * 5;
+    ballyPos += ballySpd * 5;
+    collideBall(brickXPosition, brickYPosition, ballxPos, ballyPos);
+    scorechange();
+  } else {
+    console.log("No Player")
+  }
 }, 10);
-
 
 
 function newConnection(socket) {
@@ -66,27 +67,14 @@ function newConnection(socket) {
       brickWidth = 200 * (0.8 / playerNum + 0.2);
     }
 
-    // recievedData["ballxPos"] = ballxPos;
-    // recievedData["ballyPos"] = ballyPos;
-    // recievedData["score"] = score;
-    // recievedData["highscore"] = highscore;
-    // recievedData["collideStatus"] = collideStatus;
-    // recievedData["collideBrickX"] = collideBrickX;
-    // recievedData["collideBrickY"] = collideBrickY;
-    // recievedData["fallStatus"] = fallStatus;
-
-
     var gSEmitData = {};
     gSEmitData["numOfPlayer"] = playerNum;
     gSEmitData["ballxPos"] = ballxPos;
     gSEmitData["ballyPos"] = ballyPos;
     gSEmitData["score"] = score;
     gSEmitData["highscore"] = highscore;
-    gSEmitData["collideStatus"] = collideStatus;
-    gSEmitData["collideBrickX"] = collideBrickX;
-    gSEmitData["collideBrickY"] = collideBrickY;
     gSEmitData["fallStatus"] = fallStatus;
-
+    gSEmitData["touchPoint"] = touchpoint;
 
     // console.log(recievedData);
     socket.broadcast.emit("mouseBroadcast", recievedData);
@@ -97,7 +85,6 @@ function newConnection(socket) {
 }
 
 function scorechange() {
-  cd = Constrain(cd - 1, 0, 10);
 
   if (collideStatus == true) {
     score++;
@@ -140,19 +127,14 @@ function scorechange() {
 function resetStatus() {
   fallStatus = false;
   collideStatus = false;
-  collideBrickX = -500;
-  collideBrickY = -500;
 }
 
 
 function collideBall(_bkX, _bkY, _blX, _blY) {
-  if (Math.pow(_bkX - _blX, 2) + Math.pow(_bkY - _blY, 2) <= 12100 && cd === 0) {
+  if (Math.pow(_bkX - _blX, 2) + Math.pow(_bkY - _blY, 2) <= 12100) {
     if (_blY <= 41 && _blY >= 0 || _blY >= 959 && _blY <= 1000) {
       if (abs(_blX - _bkX) <= 16 + brickWidth / 2) {
         collideStatus = true;
-        collideBrickX = _bkX;
-        collideBrickY = _bkY;
-        cd = 20;
         console.log("Collide!" + _bkX + " " + _bkY + " " + _blX + " " + _blY);
       }
     }
@@ -160,9 +142,6 @@ function collideBall(_bkX, _bkY, _blX, _blY) {
     if (_blX <= 41 && _blX >= 0 || _blX >= 959 && _blX <= 1000) {
       if (abs(_blY - _bkY) <= 16 + brickHeight / 2) {
         collideStatus = true;
-        collideBrickX = _bkX;
-        collideBrickY = _bkY;
-        cd = 20;
         console.log("Collide!" + _bkX + " " + _bkY + " " + _blX + " " + _blY);
       }
     }
