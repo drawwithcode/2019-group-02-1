@@ -125,8 +125,8 @@ function collideBall(_bkX, _bkY, _blX, _blY) {
 
 ## **Score & touchpoints**
 
-Just like in every other points game, we wanted to show not just the current score but also the highest ever reached. On the right part of the screen the user will always be able to see this datas.
-The current score represent the total number of bouncing of the ball on every brick, no matter how many player are logged in and it's send directly from the server.js. The server receiveng the datas about the current location of the bricks is able to detect the collision and if that condition in true `if (collideStatus == true) {  score++;` the score increases.
+Just like in every other arcade game, we wanted to show not just the current score but also the highest ever reached. On the right part of the screen the user will always be able to see this datas.
+**Score**The current score represent the total number of bouncing of the ball on every brick, no matter how many player are logged in and it's send directly from the server.js. The server receiveng the datas about the current location of the bricks is able to detect the collision and if that condition in true `if (collideStatus == true) {  score++;` the score increases. When the score reaches and overcomes the highscore, its values uptades with the new goal. `if (score > highscore) {  highscore = score; } `
 
 ```
 ./server.js
@@ -173,6 +173,7 @@ function scorechange() {
 }
 
 ```
+**Touchpoints**
 
 
 
