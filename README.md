@@ -29,6 +29,7 @@ _p5.collide2D
 ## **Main features**
 
 **START SCREEN**
+
 Opening the game page, before starting to play you will see this opening page containing the game rules, after reading it you only have to click to star playing.
 
 
