@@ -58,7 +58,7 @@ In the central part of the page there is the game square while on the right ther
 
 **MUSIC**
 
-The music as well is designed to recreate the atmosphere of and eighties gamer room. The theme music is an 8 bit song, going on loop that reseamble the sountracks of the old video games and with its fast ritm helps the players to keep up.
+The music as well is designed to recreate the atmosphere of an eighties gamer room. The theme music is an 8 bit song, going on loop that reseamble the sountracks of the old video games and with its fast ritm helps the players to keep up.
 The player can both decide to MUTE/UNMUTE the theme music and the bouncing sound effect, of course we suggest you to listen to it.
 
 ```
