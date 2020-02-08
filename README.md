@@ -29,7 +29,7 @@ In order to add some difficulties the levels have trippy graphics that distract 
 
 ## **Interaction**
 
-Bobit is designed to be played on computer only. The player can easily interact with the brick  just using dragging on the touchbar or using the mouse. The idea was to keep it as simple as possible in order to let the player focus on the game only.
+Bobit is designed to be played both on computers and smartphones. Logging in with the pc the player can easily interact with the brick  just using dragging on the touchbar or using the mouse; otherway, if the users is playing using a smartphone he'll only have to rotate it.  Both the interactions are meant to be  as simple as possible in order to let the player focus on the game only.
 
 ## **Libraries & tools**
 
