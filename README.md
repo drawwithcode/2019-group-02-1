@@ -328,8 +328,9 @@ Francesca Mauri
 
 ## **Course**
 
-Course reference and academic year
-Creative Coding 2018/2019 (link)
+Creative Coding 2019/2020 (https://drawwithcode.github.io/2019/)
+
 Politecnico di Milano - Scuola del Design
+
 Faculty: Michele Mauri, Tommaso Elli
 
