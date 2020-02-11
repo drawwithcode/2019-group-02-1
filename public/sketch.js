@@ -3,8 +3,8 @@ var socket;
 var numOfPlayer = 1;
 var brick;
 var brickScaleX = 1,
-  brickScaleY = 1; //板接球形变
-// var ball, ballMove;
+  brickScaleY = 1;
+
 var ballOSX, ballOSY;
 var pBallx = 0,
   pBally = 0;
@@ -17,16 +17,15 @@ var hit = false;
 var strokeColor;
 
 var lvl = "#lvl1",
-  currentLevel = 1; //当前等级
+  currentLevel = 1;
 var score = 0,
-  prevscore = 0; //分数，失败跌落分
-var highScore = 0; //最高分
-// var cd = 0; //冷却时间
+  prevscore = 0;
+var highScore = 0;
 
 var myCanvas; //画布
-var music, hitSound, fallSound; //音频
+var music, hitSound, fallSound;
 var motionBlur = false,
-  soundEffects = true; //设置音量开关，运动模糊开关
+  soundEffects = true;
 var touchpoint = [0, 20, 50, 100, 200, 500, 1000];
 
 let bgArr = [],
@@ -55,25 +54,19 @@ function preload() {
 }
 
 function setup() {
-  //初始设置背景音乐
   music.setVolume(0.1);
   music.loop();
 
   frameRate(60);
 
-  // 创建画布，球，板
   myCanvas = createCanvas(1000, 1000);
   noStroke();
   brick = new bricks();
 
-  //设置选项style
   select('#btnFullscreen').mousePressed(toggleFullscreen);
   select('#btnMute').mouseClicked(MuteMusic);
-  // select('#btnMB').mouseClicked(ToggleMotionBlur);
   select('#btnSoundEffects').mouseClicked(ToggleSoundEffects);
 
-
-  //画布大小自适应
   if (windowHeight < windowWidth) {
     myCanvas.style('height', '90%');
     myCanvas.style('width', 'auto');
@@ -82,16 +75,13 @@ function setup() {
     myCanvas.style('width', '90%');
   }
 
-  //接收数据
   socket = io();
   socket.on("mouseBroadcast", newDrawing);
   socket.on("gamestatusemit", downloadGameSt);
 
   function newDrawing(recievedData) {
-    //获取玩家数量
     numOfPlayer = recievedData.numOfPlayer;
 
-    //创建其他brick
     brickWidthPercentage = 0.8 / numOfPlayer + 0.2;
     imageMode(CENTER);
     rectMode(CENTER);
@@ -141,7 +131,6 @@ function draw() {
 
   socket.emit('mouse', sendData);
 
-  //计算当前等级
   currentLevel = lvl.match(/\d+(.\d+)?/g) * 1;
 
   push();
@@ -151,7 +140,7 @@ function draw() {
   image(bgArr[currentLevel - 1], 500, 500, 1000, 1000);
   pop();
 
-  //渲染球
+  //render the ball
   imageMode(CENTER);
   image(blArr[currentLevel - 1], ballOSX, ballOSY, 32, 32);
 
@@ -159,19 +148,18 @@ function draw() {
   brickFillv = bkvArr[currentLevel - 1].get(0, (1 - 1 / numOfPlayer) * 80, 50, 200 * (0.8 / numOfPlayer + 0.2));
   brickFillh = bkhArr[currentLevel - 1].get((1 - 1 / numOfPlayer) * 80, 0, 200 * (0.8 / numOfPlayer + 0.2), 50);
 
-  //启动分数条
+  //launch touchpoint
   touchPt();
   select('#currentScore').html(score);
   select('#Highscore').html(highScore);
 
-  //板冷却时间+接球形变
   brickScaleX = constrain(brickScaleX + 0.05, 0.6, 1);
   brickScaleY = constrain(brickScaleY + 0.05, 0.6, 1);
 
   brick.brickMove();
   brick.brickRect(brick.bX, brick.bY, brick.bW, brick.bH);
 
-  //击球声  //失球声效
+  //sound effect
   if (frameCount > 30 && soundEffects == true) {
     if (hit == true) {
       hitSound.setVolume(1);
@@ -263,18 +251,16 @@ function bricks() {
     }
   }
 
-  //绘制板
+  //render the brick
   this.brickRect = function (_brickX, _brickY, _brickW, _brickH) {
     //create brick
     var brickWidthPercentage = 0.8 / numOfPlayer + 0.2;
 
     rectMode(CENTER);
     noFill();
-    // rect(_brickX, _brickY, _brickW, _brickH);
     stroke(strokeColor);
     strokeWeight(3);
     imageMode(CENTER);
-    // rotate(brickOrien);
     push();
 
     if (dist(_brickX, _brickY, ballOSX, ballOSY) <= 100 * brickWidthPercentage && hit == true) {
@@ -299,7 +285,7 @@ function bricks() {
   }
 }
 
-function MuteMusic() { //静音
+function MuteMusic() {
   if (music.isLooping()) {
     music.pause();
     select('#btnMute').style('color', '#e94e1a');
@@ -311,7 +297,7 @@ function MuteMusic() { //静音
   }
 }
 
-function ToggleSoundEffects() { //关闭音效
+function ToggleSoundEffects() {
   if (soundEffects == true) {
     soundEffects = false;
     select('#btnSoundEffects').style('color', '#e94e1a');
@@ -323,19 +309,7 @@ function ToggleSoundEffects() { //关闭音效
   }
 }
 
-function ToggleMotionBlur() { //开启运动模糊
-  if (motionBlur == true) {
-    motionBlur = false;
-    select('#btnMB').style('color', '#e94e1a');
-    select('#btnMB').html('× Motion Blur');
-  } else {
-    motionBlur = true;
-    select('#btnMB').style('color', 'white');
-    select('#btnMB').html('√ Motion Blur');
-  }
-}
-
-function toggleFullscreen(elem) { //开启全屏
+function toggleFullscreen(elem) {
   elem = elem || document.documentElement;
   if (!document.fullscreenElement && !document.mozFullScreenElement &&
     !document.webkitFullscreenElement && !document.msFullscreenElement) {
