@@ -27,7 +27,7 @@ var myCanvas; //画布
 var music, hitSound, fallSound; //音频
 var motionBlur = false,
   soundEffects = true; //设置音量开关，运动模糊开关
-var touchpoint = [0, 5, 10, 15, 20, 25, 30];
+var touchpoint = [0, 20, 50, 100, 200, 500, 1000];
 
 let bgArr = [],
   blArr = [],
