@@ -244,7 +244,7 @@ We defined some values `var touchpoin = [0,20,50,100,200,500,1000]` to reach in 
 ```
 ./sketch.js
 
-var touchpoin = [0,5,10,15,20,25,30]
+var touchpoin = [0,20,50,100,200,500,1000];
  
 function ResetTouchPt() {
   //initial touchpoint
