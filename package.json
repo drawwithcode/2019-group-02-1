@@ -19,7 +19,7 @@
   "homepage": "https://github.com/drawwithcode/2019-group-02-1#readme",
   "dependencies": {
     "bufferutil": "^4.0.1",
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "socket.io": "^2.3.0",
     "utf-8-validate": "^5.0.2"
   }
